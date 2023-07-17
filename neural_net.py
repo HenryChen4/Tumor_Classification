@@ -68,15 +68,23 @@ class Model:
             prev_layer = x_in_layer if l == 0 else self.layers[l-1]
             del_J_z = self.layers[l].back_prop(del_J_z, prev_layer, alpha)
 
-    def fit(self, X_train, Y_train, alpha, epochs, seed=10):
+    def fit(self, X_train, Y_train, X_test, Y_test, alpha, epochs, seed=10):
         n = X_train.shape[1]
         m = X_train.shape[0]
         self.initialize(n, seed)
     
         train_hist = []
+        test_hist = []
 
         for c in range(epochs):
             train_preds = []
+            test_preds = []
+
+            for i in range(X_test.shape[0]):
+                pred = self.predict(X_test[i])
+                test_preds.append(pred)
+        
+            test_hist.append(Costs.sigmoid_cost(test_preds, Y_test))
 
             for i in range(X_train.shape[0]):
                 pred = self.forward_propagate(X_train[i])
@@ -84,10 +92,15 @@ class Model:
                 self.back_propagate(m, X_train[i], Y_train[i], alpha)
 
             train_hist.append(Costs.sigmoid_cost(train_preds, Y_train))
+
             print(f"Epoch {c+1} complete!")
         
-        return train_hist
+        return train_hist, test_hist
         
+    def predict(self, x_test):
+        prediction = self.forward_propagate(x_test)
+        return prediction
+
     def summarize(self):
         c = 0
         for layer in self.layers:

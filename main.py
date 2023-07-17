@@ -17,21 +17,25 @@ raw_Y_train = np.array(raw_Y_train)
 raw_X_test = np.array(raw_X_test)
 raw_Y_test = np.array(raw_Y_test)
 
-normalized_X_train = parser.mean_normalize(raw_X_train)
-normalized_X_test = parser.mean_normalize(raw_X_test)
+normalized_X_train = parser.z_normalize(raw_X_train)
+normalized_X_test = parser.z_normalize(raw_X_test)
 
 X_train, Y_train = parser.process_data(normalized_X_train, raw_Y_train)
 X_test, Y_test = parser.process_data(normalized_X_test, raw_Y_test)
 
 model_1 = Model([Layer(3, Relu), Layer(2, Relu), Layer(1, Sigmoid)])
 
-alpha = 11.5
+alpha = 1.5
 epochs = 200
-seed = 1
+seed = 5
 
-train_hist = model_1.fit(X_train, Y_train, alpha, epochs, seed)
+train_hist, test_hist = model_1.fit(X_train, Y_train, X_test, Y_test, alpha, epochs, seed)
 
-print(train_hist[epochs-1])
+print(f"Training error: {train_hist[epochs-1]}")
+print(f"Test error: {test_hist[epochs-1]}")
+
+
 
 plt.plot(np.arange(epochs), train_hist)
+plt.plot(np.arange(epochs), test_hist)
 plt.show()

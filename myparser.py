@@ -55,19 +55,20 @@ def parse(path, x_final_idx, test_count):
     
     return x_train_arr, y_train_arr, x_test_arr, y_test_arr
 
-def mean_normalize(x_total):
+def z_normalize(x_total):
     normalized_x_total = np.zeros(x_total.shape)
     
     m = x_total.shape[0]
-    
-    mean = 0
-    for i in range(m):
-        mean += x_total[i]
-    mean /= m
+    n = x_total.shape[1]
 
-    for i in range(m):
-        normalized_x_total[i] = (x_total[i] - mean)/m
-    
+    mean = 0
+
+    for j in range(n):
+        mean_j = np.mean(x_total[:, j])
+        std_j = np.std(x_total[:, j])
+        new_x = np.array((x_total[:, j] - mean_j)/std_j)
+        normalized_x_total[:, j] = new_x
+        
     return normalized_x_total
 
 def process_data(x_data, y_data):
