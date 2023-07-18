@@ -9,7 +9,7 @@ path = "/Users/benryben/Desktop/AI Self Learning/advanced_learning/neural_networ
 
 test_count = 100
 
-raw_X_train, raw_Y_train, raw_X_test, raw_Y_test = parser.parse(path=path, x_final_idx=4, test_count=test_count)
+raw_X_train, raw_Y_train, raw_X_test, raw_Y_test = parser.parse(path=path, x_final_idx=4, test_count=test_count, total_count=569)
 
 raw_X_train = np.array(raw_X_train)
 raw_Y_train = np.array(raw_Y_train)
@@ -33,8 +33,6 @@ train_hist, test_hist = model_1.fit(X_train, Y_train, X_test, Y_test, alpha, epo
 
 print(f"Training error: {train_hist[epochs-1]}")
 print(f"Test error: {test_hist[epochs-1]}")
-
-
 
 plt.plot(np.arange(epochs), train_hist)
 plt.plot(np.arange(epochs), test_hist)

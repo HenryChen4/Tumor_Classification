@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 
-def parse(path, x_final_idx, test_count):
+def parse(path, x_final_idx, test_count, total_count):
     x_train_arr = []
     y_train_arr = []
 
@@ -12,10 +12,14 @@ def parse(path, x_final_idx, test_count):
     with open(path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
+            if i > total_count:
+                break
+
             x_train_features = []
             x_test_features = []
 
             c = 0
+
             for item in row:
                 if i < test_count:
                     try:
@@ -58,10 +62,7 @@ def parse(path, x_final_idx, test_count):
 def z_normalize(x_total):
     normalized_x_total = np.zeros(x_total.shape)
     
-    m = x_total.shape[0]
     n = x_total.shape[1]
-
-    mean = 0
 
     for j in range(n):
         mean_j = np.mean(x_total[:, j])
