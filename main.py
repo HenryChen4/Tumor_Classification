@@ -7,7 +7,7 @@ from activations import Sigmoid, Relu
 
 path = "/Users/benryben/Desktop/AI Self Learning/advanced_learning/neural_networks/projects/cancer_detection/data.csv"
 
-test_count = 100
+test_count = 30
 
 raw_X_train, raw_Y_train, raw_X_test, raw_Y_test = parser.parse(path=path, x_final_idx=4, test_count=test_count, total_count=569)
 
