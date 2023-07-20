@@ -1,21 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import myparser as parser
-from neural_net import Model, Layer
-from activations import Sigmoid, Relu
+import helper.myparser as parser
+from helper.neural_net import Model, Layer
+from helper.activations import Sigmoid, Relu
 
 
 path = "/Users/benryben/Desktop/AI Self Learning/advanced_learning/neural_networks/projects/cancer_detection/data.csv"
 
 test_count = 100
 
-raw_X_train, raw_Y_train, raw_X_test, raw_Y_test = parser.parse(path=path, x_final_idx=9, test_count=test_count, total_count=569)
+data = parser.parse(path, 0, 2, 569)
 
-raw_X_train = np.array(raw_X_train)
-raw_Y_train = np.array(raw_Y_train)
+# scrambling data
+parser.scramble_data(data, seed=1)
 
-raw_X_test = np.array(raw_X_test)
-raw_Y_test = np.array(raw_Y_test)
+raw_X_train, raw_Y_train = parser.get_subarr(data, 500)
+raw_X_test, raw_Y_test = parser.get_subarr(data, 69)
 
 normalized_X_train = parser.z_normalize(raw_X_train)
 normalized_X_test = parser.z_normalize(raw_X_test)
@@ -29,7 +29,7 @@ alpha = 1.5
 epochs = 200
 seed = 5
 
-# Train and test data
+# # Train and test data
 train_hist, test_hist, train_acc_hist, test_acc_hist = model_1.fit(X_train, Y_train, X_test, Y_test, alpha, epochs, seed)
 
 # Print Results
