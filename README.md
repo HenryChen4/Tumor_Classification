@@ -31,6 +31,9 @@
 </table>
 <img width="893" alt="Screen Shot 2023-07-20 at 12 04 34 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/6ec7ac46-c57f-41eb-bf19-f8395191cc47">
 <h4>Final Results</h4>
-<img width="1440" alt="Screen Shot 2023-07-08 at 1 30 41 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/084db5a4-4d8b-446c-bfd9-23c80a45f2ae">
+Training error: 0.10361329
+Test error: 0.10095054
+Train accuracy: 0.898
+Test accuracy: 0.8985507246376812
 <hr>
 
