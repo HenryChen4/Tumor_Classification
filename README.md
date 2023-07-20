@@ -1,5 +1,41 @@
 <h1>Binary Classification of Breast Tumors</h1>
 <h2>About</h2>
 <p>Applying a neural network towards classifying breast tumors as malignant or benign using mean radius and texture measurements. Various models, learning rates, and random seeds were tested. Results are shown below. The neural network used in this project is explored more by the repository, https://github.com/HenryChen4/Neural_Network.</p>
-<h3>1st run, prior to regularization</h3>
-
+<h3>Test 1, prior to regularization</h3>
+<h4>Settings</h4>
+<ul>
+  <li>Learning rate: 1.5</li>
+  <li>Epochs: 200</li>
+  <li>Seed for weight init: 5</li>
+  <li>Seed for randomized data: 1</li>
+  <li># of train: 500</li>
+  <li># of test: 69</li>
+</ul>
+<h4>Model Structure</h4>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax"></th>
+    <th class="tg-0lax"></th>
+    <th class="tg-0lax"></th>
+    <th class="tg-0lax"></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+</tbody>
+</table>
+<img width="893" alt="Screen Shot 2023-07-20 at 12 04 34 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/6ec7ac46-c57f-41eb-bf19-f8395191cc47">
