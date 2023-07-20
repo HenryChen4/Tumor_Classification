@@ -1,6 +1,7 @@
 <h1>Binary Classification of Breast Tumors</h1>
 <h2>About</h2>
 <p>Applying a neural network towards classifying breast tumors as malignant or benign using mean radius and texture measurements. Various models, learning rates, and random seeds were tested. Results are shown below. The neural network used in this project is explored more by the repository, https://github.com/HenryChen4/Neural_Network.</p>
+<h2>Tests</h2> 
 <h3>Test 1, prior to regularization</h3>
 <h4>Settings</h4>
 <ul>
@@ -29,3 +30,7 @@
 </tbody>
 </table>
 <img width="893" alt="Screen Shot 2023-07-20 at 12 04 34 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/6ec7ac46-c57f-41eb-bf19-f8395191cc47">
+<h4>Final Results</h4>
+<img width="1440" alt="Screen Shot 2023-07-08 at 1 30 41 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/084db5a4-4d8b-446c-bfd9-23c80a45f2ae">
+<hr>
+
