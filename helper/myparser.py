@@ -25,7 +25,7 @@ def parse(path, ignore_idx, params, total_count):
     
     return all_data
 
-# using fisher yates algorithm
+# using fisher yates shuffle
 def scramble_data(all_data, seed=10):
     random.seed(seed)
     for i in range(len(all_data)-1, -1, -1):

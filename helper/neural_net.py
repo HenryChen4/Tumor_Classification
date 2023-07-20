@@ -1,5 +1,5 @@
 import numpy as np
-from activations import Sigmoid, Linear, Relu, Costs
+from helper.activations import Sigmoid, Linear, Relu, Costs
 
 class Layer:
     def __init__(self, units, activation):
@@ -22,13 +22,13 @@ class Layer:
         self.neurons = self.activation.g(Z)
     
     # backprops weights in single layer
-    def back_prop(self, del_J_z, prev_layer, alpha):
+    def back_prop(self, del_J_z, prev_layer, alpha, reg_rate, m):
         del_J_w = np.matmul(prev_layer.neurons, del_J_z.T)
         del_J_b = del_J_z
 
         prev_del_J_z = np.multiply(np.matmul(self.W_l.T, del_J_z), prev_layer.activation.del_g_z(prev_layer.neurons))
 
-        self.W_l -= alpha * del_J_w.T
+        self.W_l -= alpha * del_J_w.T + (alpha * reg_rate * self.W_l)/m
         self.B_l -= alpha * del_J_b
 
         return prev_del_J_z
@@ -63,7 +63,7 @@ class Model:
         return a_in
 
     # back propagates through entire model
-    def back_propagate(self, m, x_in, y_out, alpha):
+    def back_propagate(self, m, x_in, y_out, alpha, reg_rate):
         a_out = self.layers[-1].neurons
         del_J_z = self.layers[-1].activation.del_J_z(a_out, y_out, m)
 
@@ -72,9 +72,9 @@ class Model:
 
         for l in range(self.layers.shape[0]-1, -1, -1):
             prev_layer = x_in_layer if l == 0 else self.layers[l-1]
-            del_J_z = self.layers[l].back_prop(del_J_z, prev_layer, alpha)
+            del_J_z = self.layers[l].back_prop(del_J_z, prev_layer, alpha, reg_rate, m)
 
-    def fit(self, X_train, Y_train, X_test, Y_test, alpha, epochs, seed=10):
+    def fit(self, X_train, Y_train, X_test, Y_test, alpha, epochs, seed=10, reg_rate=0):
         n = X_train.shape[1]
         self.initialize(n, seed)
     
@@ -85,12 +85,12 @@ class Model:
         test_acc_hist = []
 
         for c in range(epochs):
-            test_results = self.test(X_test, Y_test)
+            test_results = self.test(X_test, Y_test, reg_rate)
 
             test_J_hist.append(test_results[0])
             test_acc_hist.append(test_results[1])
 
-            train_results = self.train(X_train, Y_train, alpha)
+            train_results = self.train(X_train, Y_train, alpha, reg_rate)
 
             train_J_hist.append(train_results[0])
             train_acc_hist.append(train_results[1])
@@ -99,7 +99,7 @@ class Model:
         
         return train_J_hist, test_J_hist, train_acc_hist, test_acc_hist
     
-    def test(self, X_test, Y_test):
+    def test(self, X_test, Y_test, reg_rate):
         test_accuracy = 0
 
         test_preds = []
@@ -111,11 +111,11 @@ class Model:
             if (pred > 0.5 and Y_test[i][0] == 1) or (pred < 0.5 and Y_test[i][0] == 0):
                 test_accuracy += 1
         
-        test_cost = Costs.sigmoid_cost(test_preds, Y_test)
+        test_cost = Costs.sigmoid_cost(test_preds, Y_test) + self.get_l2_reg(reg_rate, X_test.shape[0])
         
         return [test_cost, test_accuracy/X_test.shape[0]]
     
-    def train(self, X_train, Y_train, alpha):
+    def train(self, X_train, Y_train, alpha, reg_rate):
         train_accuracy = 0
 
         train_preds = []
@@ -129,11 +129,19 @@ class Model:
             if (pred > 0.5 and Y_train[i][0] == 1) or (pred < 0.5 and Y_train[i][0] == 0):
                     train_accuracy += 1
 
-            self.back_propagate(m, X_train[i], Y_train[i], alpha)
+            self.back_propagate(m, X_train[i], Y_train[i], alpha, reg_rate)
         
-        train_cost = Costs.sigmoid_cost(train_preds, Y_train)
+        train_cost = Costs.sigmoid_cost(train_preds, Y_train) + self.get_l2_reg(reg_rate, m)
 
         return [train_cost, train_accuracy/m]
+
+    def get_l2_reg(self, reg_rate, m):
+        sum = 0
+        for layer in self.layers:
+            for i in range(layer.W_l.shape[0]):
+                for j in range(layer.W_l.shape[1]):
+                    sum += (layer.W_l[i][j] ** 2)
+        return (sum * reg_rate) / (2 * m)
 
     def summarize(self):
         c = 0

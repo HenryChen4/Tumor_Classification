@@ -7,8 +7,6 @@ from helper.activations import Sigmoid, Relu
 
 path = "/Users/benryben/Desktop/AI Self Learning/advanced_learning/neural_networks/projects/cancer_detection/data.csv"
 
-test_count = 100
-
 data = parser.parse(path, 0, 2, 569)
 
 # scrambling data
@@ -23,21 +21,24 @@ normalized_X_test = parser.z_normalize(raw_X_test)
 X_train, Y_train = parser.process_data(normalized_X_train, raw_Y_train)
 X_test, Y_test = parser.process_data(normalized_X_test, raw_Y_test)
 
-model_1 = Model([Layer(3, Relu), Layer(2, Relu), Layer(1, Sigmoid)])
+model_1 = Model([Layer(1, Sigmoid)])
 
 alpha = 1.5
 epochs = 200
 seed = 5
 
-# # Train and test data
-train_hist, test_hist, train_acc_hist, test_acc_hist = model_1.fit(X_train, Y_train, X_test, Y_test, alpha, epochs, seed)
+reg_rate = 0.01
+
+# Train and test data
+train_hist, test_hist, train_acc_hist, test_acc_hist = model_1.fit(X_train, Y_train, X_test, Y_test, alpha, epochs, seed, reg_rate)
 
 # Print Results
 print(f"Training error: {train_hist[epochs-1]}")
-print(f"Test error: {test_hist[epochs-1]}")
 print(f"Train accuracy: {train_acc_hist[epochs-1]}")
+print(f"Test error: {test_hist[epochs-1]}")
 print(f"Test accuracy: {test_acc_hist[epochs-1]}")
 
+# graph results
 plt.subplot(2, 1, 1)
 plt.title("Learning curves")
 plt.plot(np.arange(epochs), train_hist)
