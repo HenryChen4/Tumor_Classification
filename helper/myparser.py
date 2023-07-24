@@ -64,7 +64,8 @@ def z_normalize(x_total):
 def process_data(x_data, y_data):
     X_processed = []
     Y_processed = []
+
     for i in range(x_data.shape[0]):
         X_processed.append(x_data[i].reshape(x_data.shape[1], 1))
-        Y_processed.append(y_data[i].reshape(1, 1))
+        Y_processed.append(y_data[i].reshape(1))
     return np.array(X_processed), np.array(Y_processed)

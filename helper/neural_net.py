@@ -23,12 +23,15 @@ class Layer:
     
     # backprops weights in single layer
     def back_prop(self, del_J_z, prev_layer, alpha, reg_rate, m):
-        del_J_w = np.matmul(prev_layer.neurons, del_J_z.T)
+        del_J_w = np.matmul(prev_layer.neurons, del_J_z.T) + (reg_rate * self.W_l.T / m)
         del_J_b = del_J_z
 
         prev_del_J_z = np.multiply(np.matmul(self.W_l.T, del_J_z), prev_layer.activation.del_g_z(prev_layer.neurons))
 
-        self.W_l -= alpha * del_J_w.T + (alpha * reg_rate * self.W_l)/m
+        # print("reg term")
+        # print((alpha * reg_rate * self.W_l)/m)
+
+        self.W_l -= alpha * del_J_w.T
         self.B_l -= alpha * del_J_b
 
         return prev_del_J_z
@@ -58,8 +61,17 @@ class Model:
     def forward_propagate(self, x_in):
         a_in = x_in
         for l in range(self.layers.shape[0]):
+            # print(f"Layer {l}")
+
+            # print("Input")
+            # print(a_in)
+
             self.layers[l].feed_forward(a_in)
             a_in = self.layers[l].neurons
+
+            # self.layers[l].summarize()
+            # print('\n')
+
         return a_in
 
     # back propagates through entire model
@@ -85,10 +97,16 @@ class Model:
         test_acc_hist = []
 
         for c in range(epochs):
+            # print(f"Epoch {c+1} beginning ==================================================")
+
+            # print("Testing")
+
             test_results = self.test(X_test, Y_test, reg_rate)
 
             test_J_hist.append(test_results[0])
             test_acc_hist.append(test_results[1])
+
+            # print("Training")
 
             train_results = self.train(X_train, Y_train, alpha, reg_rate)
 
@@ -101,7 +119,6 @@ class Model:
     
     def test(self, X_test, Y_test, reg_rate):
         test_accuracy = 0
-
         test_preds = []
 
         for i in range(X_test.shape[0]):
@@ -111,6 +128,10 @@ class Model:
             if (pred > 0.5 and Y_test[i][0] == 1) or (pred < 0.5 and Y_test[i][0] == 0):
                 test_accuracy += 1
         
+        # self.summarize()
+        # print("Test regularization")
+        # print(self.get_l2_reg(reg_rate, X_test.shape[0]))
+
         test_cost = Costs.sigmoid_cost(test_preds, Y_test) + self.get_l2_reg(reg_rate, X_test.shape[0])
         
         return [test_cost, test_accuracy/X_test.shape[0]]
@@ -130,17 +151,22 @@ class Model:
                     train_accuracy += 1
 
             self.back_propagate(m, X_train[i], Y_train[i], alpha, reg_rate)
-        
+
+        # print("Train regularization")
+        # print(self.get_l2_reg(reg_rate, m))
+
         train_cost = Costs.sigmoid_cost(train_preds, Y_train) + self.get_l2_reg(reg_rate, m)
 
         return [train_cost, train_accuracy/m]
 
     def get_l2_reg(self, reg_rate, m):
         sum = 0
+        
         for layer in self.layers:
             for i in range(layer.W_l.shape[0]):
                 for j in range(layer.W_l.shape[1]):
                     sum += (layer.W_l[i][j] ** 2)
+
         return (sum * reg_rate) / (2 * m)
 
     def summarize(self):

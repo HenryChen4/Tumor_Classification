@@ -13,11 +13,8 @@ class Sigmoid:
         return del_J_g * del_g_z
 
 class Linear:
-    def __init__(self, Z):
-        self.Z = Z
-    
-    def g(self):
-        return self.Z
+    def g(Z):
+        return Z
     
     def del_g_z(self):
         return 1
@@ -40,5 +37,5 @@ class Costs:
         m = y_actual.shape[0]
         error = 0
         for i in range(m):
-            error += (y_actual[i] * np.log10(y_hat[i][0]) + (1 - y_actual[i]) * np.log10(1 - y_hat[i][0]))
-        return (error/-m).reshape(1)
+            error += (y_actual[i] * np.log(y_hat[i][0]) + (1 - y_actual[i]) * np.log(1 - y_hat[i][0]))
+        return (-error/m).reshape(1)
