@@ -1,6 +1,6 @@
 <h1>Binary Classification of Breast Tumors</h1>
 <h2>About</h2>
-<p>Applying a diy neural network towards classifying breast tumors as malignant or benign using mean radius and texture measurements. Various models, learning rates, and random seeds were tested. Results are shown below. The neural network used in this project is explored more by the repository, https://github.com/HenryChen4/Neural_Network.</p>
+<p>Applying a homemade neural network towards classifying breast tumors as malignant or benign using mean radius and texture measurements. Various models, learning rates, and random seeds were tested. Results are shown below. The neural network used in this project is explored more by the repository, https://github.com/HenryChen4/Neural_Network.</p>
 <h2>Tests</h2> 
 <h3>Test 1, prior to regularization</h3>
 <h4>Settings</h4>
