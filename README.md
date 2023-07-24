@@ -35,4 +35,17 @@
 Train accuracy: 0.892
 Test loss: [0.23887341]
 Test accuracy: 0.8840579710144928</p>
+<h3>Test 1, with L2 regularization</h3>
+<h4>Settings</h4>
+<ul>
+  <li>Same as above</li>
+  <li>Regularization rate: 0.002</li>
+</ul>
+<img width="843" alt="Screen Shot 2023-07-24 at 8 28 45 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/e63eea75-5f44-4563-ad48-d08c15613828">
+<h4>Results</h4>
+<p>Training loss: [0.24728433]
+Train accuracy: 0.892
+Test loss: [0.23611153]
+Test accuracy: 0.8840579710144928</p>
+<p>A very slight improvement in test loss. 0.2388 -> 0.2361</p>
 
