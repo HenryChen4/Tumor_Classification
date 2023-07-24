@@ -28,8 +28,8 @@
     <td class="tg-0pky">Units: 1<br>Activation: Sigmoid</td>
   </tr>
 </tbody>
-<img width="935" alt="Screen Shot 2023-07-24 at 8 10 04 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/253d92ee-fe86-4705-a4ee-51d19bfc9f6c">
 </table>
+<img width="935" alt="Screen Shot 2023-07-24 at 8 10 04 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/253d92ee-fe86-4705-a4ee-51d19bfc9f6c">
 <h4>Results</h4>
 <p>Training loss: [0.24815771]
 Train accuracy: 0.892
