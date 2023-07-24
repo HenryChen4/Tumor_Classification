@@ -5,9 +5,9 @@
 <h3>Test 1, prior to regularization</h3>
 <h4>Settings</h4>
 <ul>
-  <li>Learning rate: 1.5</li>
-  <li>Epochs: 200</li>
-  <li>Seed for weight init: 5</li>
+  <li>Learning rate: 3</li>
+  <li>Epochs: 100</li>
+  <li>Seed for weight init: 1</li>
   <li>Seed for randomized data: 1</li>
   <li># of train: 500</li>
   <li># of test: 69</li>
@@ -28,11 +28,11 @@
     <td class="tg-0pky">Units: 1<br>Activation: Sigmoid</td>
   </tr>
 </tbody>
+<img width="935" alt="Screen Shot 2023-07-24 at 8 10 04 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/253d92ee-fe86-4705-a4ee-51d19bfc9f6c">
 </table>
-<img width="893" alt="Screen Shot 2023-07-20 at 12 04 34 AM" src="https://github.com/HenryChen4/Tumor_Classification/assets/71111859/6ec7ac46-c57f-41eb-bf19-f8395191cc47">
 <h4>Results</h4>
-Training error: 0.10361329
-Test error: 0.10095054
-Train accuracy: 0.898
-Test accuracy: 0.8985507246376812
+<p>Training loss: [0.24815771]
+Train accuracy: 0.892
+Test loss: [0.23887341]
+Test accuracy: 0.8840579710144928</p>
 
