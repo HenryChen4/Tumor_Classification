@@ -1,8 +1,6 @@
 <h1>Binary Classification of Breast Tumors</h1>
 <h2>About</h2>
 <p>Applying a homemade neural network towards classifying breast tumors as malignant or benign using mean radius and texture measurements. Various models, learning rates, and random seeds were tested. Results are shown below. The neural network used in this project is explored more by the repository, https://github.com/HenryChen4/Neural_Network.</p>
-<h2>Tests</h2> 
-<h3>Test 1, prior to regularization</h3>
 <h4>Settings</h4>
 <ul>
   <li>Learning rate: 3</li>
@@ -12,7 +10,6 @@
   <li># of train: 500</li>
   <li># of test: 69</li>
 </ul>
-<h4>Model Structure</h4>
 <table class="tg">
 <thead>
   <tr>
@@ -35,7 +32,7 @@
 Train accuracy: 0.892
 Test loss: [0.23887341]
 Test accuracy: 0.8840579710144928</p>
-<h3>Test 1, with L2 regularization</h3>
+<h3>with L2 regularization</h3>
 <h4>Settings</h4>
 <ul>
   <li>Same as above</li>
